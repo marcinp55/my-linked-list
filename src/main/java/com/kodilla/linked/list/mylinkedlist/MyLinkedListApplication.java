@@ -17,7 +17,23 @@ public class MyLinkedListApplication {
         linkedCollection.addElement("Fourth element");
         linkedCollection.addElement("Fifth element");
 
-        String searched = linkedCollection.getElement(2);
-        System.out.println(searched);
+        System.out.println(linkedCollection.getElement(1));
+        System.out.println(linkedCollection.getElement(2));
+        System.out.println(linkedCollection.getElement(3));
+        System.out.println(linkedCollection.getElement(4));
+        System.out.println(linkedCollection.getElement(5));
+
+        linkedCollection.removeElement("First element");
+        System.out.println("--------------------------");
+        System.out.println(linkedCollection.getElement(1));
+        System.out.println(linkedCollection.getElement(2));
+        System.out.println(linkedCollection.getElement(3));
+        System.out.println(linkedCollection.getElement(4));
+        System.out.println("--------------------------");
+        linkedCollection.removeElement("Third element");
+        System.out.println(linkedCollection.getElement(1));
+        System.out.println(linkedCollection.getElement(2));
+        System.out.println(linkedCollection.getElement(3));
+        System.out.println(linkedCollection.getElement(4));
     }
 }

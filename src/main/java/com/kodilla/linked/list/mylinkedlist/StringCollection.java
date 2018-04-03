@@ -2,20 +2,20 @@ package com.kodilla.linked.list.mylinkedlist;
 
 public class StringCollection {
     private Element collectionHead = null;
-    private int index = -1;
-    private Element tempPrev = null;
+    private Element temp = null;
     private String getResult = null;
+    private boolean removeResult = false;
 
     public String getElement(int n) {
-            if (index == 0 && n == 1) {
-                getResult = collectionHead.getValue();
-            } else {
-                tempPrev = collectionHead.getPrev();
-                for(int i = index;i <= n;i--) {
-                    tempPrev = tempPrev.getPrev();
-                    getResult = tempPrev.getValue();
-                }
+        temp = collectionHead;
+        if(n == 1) {
+            getResult = collectionHead.getValue();
+        } else {
+            for (int i = 1;i < n;i++){
+                temp = temp.getNext();
+                getResult = temp.getValue();
             }
+        }
         return getResult;
     }
 
@@ -23,17 +23,40 @@ public class StringCollection {
         if (collectionHead == null) {
             Element element = new Element(s);
             collectionHead = element;
-            index = 0;
         } else {
-            Element element = new Element(s);
-            collectionHead.setNext(element);
-            element.setPrev(collectionHead);
-            collectionHead = element;
-            index = index + 1;
+            temp = collectionHead;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
+            }
+            Element newElement = new Element(s);
+            temp.setNext(newElement);
+            newElement.setPrev(temp);
         }
     }
 
     public boolean removeElement(String s) {
-        return true;
+        Element prev;
+        Element next;
+        temp = collectionHead;
+        if (collectionHead.getValue() == s) {
+            temp = temp.getNext();
+            temp.setPrev(null);
+            collectionHead = temp;
+            removeResult = true;
+        } else {
+            while (temp.getNext() != null) {
+                if(temp.getValue() == s) {
+                    prev = temp.getPrev();
+                    next = temp.getNext();
+                    prev.setNext(next);
+                    next.setPrev(prev);
+                    temp.setNext(null);
+                    removeResult = true;
+                } else {
+                    removeResult = false;
+                }
+            }
+        }
+        return removeResult;
     }
 }
